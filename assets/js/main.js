@@ -41,7 +41,7 @@ function renderHeader(activePage = '') {
       <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
           <!-- Logo -->
-          <a href="index.html" class="flex items-center gap-2 group" aria-label="Prakash Knowledge Hub">
+          <a href="./index.html" class="flex items-center gap-2 group" aria-label="Prakash Knowledge Hub">
             <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-content-center items-center justify-center text-white font-bold text-lg shadow-lg group-hover:shadow-purple-500/30 transition-all duration-200">P</div>
             <span class="logo-text text-lg font-bold hidden sm:block">Prakash Knowledge</span>
           </a>
