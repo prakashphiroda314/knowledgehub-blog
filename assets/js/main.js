@@ -7,7 +7,7 @@ let CATEGORIES = [];
 // Load articles from JSON
 async function loadArticles() {
   try {
-    const res = await fetch('/data/articles.json');
+    const res = await fetch('data/articles.json');
     const data = await res.json();
     ARTICLES = data.articles;
     CATEGORIES = data.categories;
@@ -21,7 +21,7 @@ async function loadArticles() {
 // ===== HEADER HTML =====
 function renderHeader(activePage = '') {
   const navLinks = [
-    { href: '/', label: 'Home', id: 'home' },
+    { href: 'index.html', label: 'Home', id: 'home' },
     { href: 'articles.html', label: 'Articles', id: 'articles' },
     { href: 'categories.html', label: 'Categories', id: 'categories' },
     { href: 'about.html', label: 'About', id: 'about' },
@@ -54,7 +54,7 @@ function renderHeader(activePage = '') {
           <!-- Actions -->
           <div class="flex items-center gap-2">
             <!-- Search -->
-            <a href="/search.html" class="theme-toggle" aria-label="Search">
+            <a href="search.html" class="theme-toggle" aria-label="Search">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
             </a>
 
@@ -186,7 +186,7 @@ function renderFooter() {
             © ${new Date().getFullYear()} Prakash Knowledge Hub. All rights reserved.
           </p>
           <div class="flex items-center gap-6">
-            <a href="/sitemap.xml" class="text-gray-500 text-sm hover:text-gray-300 transition-colors">Sitemap</a>
+            <a href="sitemap.xml" class="text-gray-500 text-sm hover:text-gray-300 transition-colors">Sitemap</a>
             <span class="text-gray-700">•</span>
             <span class="text-gray-500 text-sm">Made with ❤️ by Prakash Choudhary</span>
           </div>
