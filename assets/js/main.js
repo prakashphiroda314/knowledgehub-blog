@@ -144,14 +144,14 @@ function renderFooter() {
           <div>
             <h4 class="footer-heading">Categories</h4>
             <div class="space-y-1">
-              <a href="/categories.html#artificial-intelligence" class="footer-link">Artificial Intelligence</a>
-              <a href="/categories.html#pi-network" class="footer-link">Pi Network</a>
-              <a href="/categories.html#web3-blockchain" class="footer-link">Web3 & Blockchain</a>
-              <a href="/categories.html#data-analytics" class="footer-link">Data Analytics</a>
-              <a href="/categories.html#personal-branding" class="footer-link">Personal Branding</a>
-              <a href="/categories.html#digital-growth" class="footer-link">Digital Growth</a>
-              <a href="/categories.html#education" class="footer-link">Education</a>
-              <a href="/categories.html#agri-tech" class="footer-link">Agri-Tech</a>
+              <a href="categories.html#artificial-intelligence" class="footer-link">Artificial Intelligence</a>
+              <a href="categories.html#pi-network" class="footer-link">Pi Network</a>
+              <a href="categories.html#web3-blockchain" class="footer-link">Web3 & Blockchain</a>
+              <a href="categories.html#data-analytics" class="footer-link">Data Analytics</a>
+              <a href="categories.html#personal-branding" class="footer-link">Personal Branding</a>
+              <a href="categories.html#digital-growth" class="footer-link">Digital Growth</a>
+              <a href="categories.html#education" class="footer-link">Education</a>
+              <a href="categories.html#agri-tech" class="footer-link">Agri-Tech</a>
             </div>
           </div>
 
@@ -160,10 +160,10 @@ function renderFooter() {
             <h4 class="footer-heading">Platform</h4>
             <div class="space-y-1">
               <a href="/" class="footer-link">Home</a>
-              <a href="/articles.html" class="footer-link">All Articles</a>
-              <a href="/about.html" class="footer-link">About Prakash</a>
-              <a href="/search.html" class="footer-link">Search</a>
-              <a href="/contact.html" class="footer-link">Contact</a>
+              <a href="articles.html" class="footer-link">All Articles</a>
+              <a href="about.html" class="footer-link">About Prakash</a>
+              <a href="search.html" class="footer-link">Search</a>
+              <a href="contact.html" class="footer-link">Contact</a>
               <a href="https://prakashfirodawork-ctrl.github.io/Prakash-Identity-Hub/" target="_blank" rel="noopener" class="footer-link">Portfolio</a>
             </div>
           </div>
