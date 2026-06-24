@@ -12,7 +12,7 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://prakash-knowledge-hub.netlify.app/" />
+  <meta property="og:url" content="https://prakashfirodawork-ctrl.github.io/knowledgehub-blog" />
   <meta property="og:title" content="Prakash Knowledge Hub — Learn. Build. Grow. Impact." />
   <meta property="og:description" content="Practical insights on AI, Pi Network, Web3, Data Analytics, Personal Branding and more." />
   <meta property="og:image" content="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&q=80" />
@@ -124,11 +124,11 @@
 
         <!-- CTA Buttons -->
         <div class="flex flex-wrap gap-4 animate-slide-up" style="animation-delay:0.3s">
-          <a href="/articles.html" class="btn-primary">
+          <a href="articles.html" class="btn-primary">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
             Explore Articles
           </a>
-          <a href="/about.html" class="btn-secondary">
+          <a href="about.html" class="btn-secondary">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
             About Prakash
           </a>
@@ -202,7 +202,7 @@
           <span class="section-eyebrow">Fresh</span>
           <h2 class="section-title text-3xl lg:text-4xl mt-2">Latest Articles</h2>
         </div>
-        <a href="/articles.html" class="btn-outline hidden sm:inline-flex">
+        <a href="articles.html" class="btn-outline hidden sm:inline-flex">
           View All
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </a>
@@ -216,7 +216,7 @@
       </div>
 
       <div class="text-center mt-8 sm:hidden">
-        <a href="/articles.html" class="btn-outline inline-flex">View All Articles</a>
+        <a href="articles.html" class="btn-outline inline-flex">View All Articles</a>
       </div>
     </div>
   </section>
@@ -325,7 +325,7 @@
 
       // Topics Grid
       const topicsHtml = TOPICS.map(t => `
-        <a href="/articles.html?category=${t.slug}" class="topic-card animate-on-scroll" style="--delay:${t.delay}">
+        <a href="articles.html?category=${t.slug}" class="topic-card animate-on-scroll" style="--delay:${t.delay}">
           <span class="topic-icon" style="--delay:${t.delay}">${t.icon}</span>
           <div class="font-semibold text-sm text-gray-900 dark:text-white mb-1" style="font-family:Poppins">${t.name}</div>
           <div class="text-xs text-gray-500 dark:text-gray-400">${t.desc}</div>
@@ -342,7 +342,7 @@
       // Popular Reads (top 8 by views)
       const popular = [...articles].sort((a, b) => b.views - a.views).slice(0, 8);
       document.getElementById('popular-reads').innerHTML = popular.map((a, i) => `
-        <a href="/article.html?slug=${a.slug}" class="popular-item animate-on-scroll">
+        <a href="article.html?slug=${a.slug}" class="popular-item animate-on-scroll">
           <span class="popular-number">${String(i + 1).padStart(2, '0')}</span>
           <div class="flex-1 min-w-0">
             <div class="font-semibold text-sm text-gray-900 dark:text-white truncate" style="font-family:Poppins">${a.title}</div>
@@ -369,7 +369,7 @@
                 <span class="text-2xl">${catIcons[cat] || '📌'}</span>
                 <h3 class="text-xl font-bold text-gray-900 dark:text-white" style="font-family:Poppins">${cat}</h3>
               </div>
-              <a href="/articles.html?category=${catSlug}" class="text-sm text-purple-600 dark:text-purple-400 font-medium hover:underline flex items-center gap-1">
+              <a href="articles.html?category=${catSlug}" class="text-sm text-purple-600 dark:text-purple-400 font-medium hover:underline flex items-center gap-1">
                 See all
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
               </a>
