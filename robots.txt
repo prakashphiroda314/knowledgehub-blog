@@ -1,4 +1,20 @@
+# Global directives for all search engine crawlers
 User-agent: *
 Allow: /
 
+# Disallow crawling of internal search pages and system files to preserve crawl budget
+Disallow: /*?s=
+Disallow: /*?search=
+Disallow: /search.html
+Disallow: /tmp/
+Disallow: /config/
+
+# Explicitly target AI scraping bots (Optional: Change to 'Disallow: /' if you want to block AI training)
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Link to the primary sitemap index
 Sitemap: https://prakashfirodawork-ctrl.github.io/knowledgehub-blog/sitemap.xml
