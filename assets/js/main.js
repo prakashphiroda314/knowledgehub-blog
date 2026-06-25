@@ -113,7 +113,7 @@ function renderFooter() {
 
           <!-- Brand -->
           <div class="lg:col-span-2">
-            <a href="search.html" class="flex items-center gap-3 mb-4">
+            <a href="index.html" class="flex items-center gap-3 mb-4">
               <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center text-white font-bold text-xl">P</div>
               <span class="logo-text text-xl font-bold">Prakash Knowledge Hub</span>
             </a>
@@ -164,21 +164,9 @@ function renderFooter() {
               <a href="about.html" class="footer-link">About Prakash</a>
               <a href="search.html" class="footer-link">Search</a>
               <a href="contact.html" class="footer-link">Contact</a>
-              <a href="https://prakashfirodawork-ctrl.github.io/Prakash-Identity-Hub/" target="_blank" rel="noopener" class="footer-link">Portfolio</a>
+          
             </div>
           </div>
-
-          <!-- Newsletter -->
-          <div>
-            <h4 class="footer-heading">Stay Updated</h4>
-            <p class="text-gray-400 text-sm mb-4 leading-relaxed">Get insights on AI, Web3, Pi Network and Digital Growth delivered to your inbox.</p>
-            <div class="flex">
-              <input type="email" placeholder="Your email" class="newsletter-input text-sm" id="footer-email" />
-              <button class="newsletter-btn text-sm" onclick="subscribeNewsletter()">→</button>
-            </div>
-            <p class="text-gray-500 text-xs mt-2">No spam. Unsubscribe anytime.</p>
-          </div>
-        </div>
 
         <!-- Bottom -->
         <div class="border-t border-gray-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
