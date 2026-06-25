@@ -1,16 +1,25 @@
 /* ===== PRAKASH KNOWLEDGE HUB - Main JavaScript ===== */
 
-// ===== ARTICLE DATA STORE =====
+// ===== GLOBAL DATA STORE =====
 let ARTICLES = [];
 let CATEGORIES = [];
+
+// Helper function to prevent Cross-Site Scripting (XSS)
+function escapeHTML(str) {
+  if (!str) return '';
+  return str.replace(/[&<>'"]/g, 
+    tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+  );
+}
 
 // Load articles from JSON
 async function loadArticles() {
   try {
     const res = await fetch('data/articles.json');
+    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     const data = await res.json();
-    ARTICLES = data.articles;
-    CATEGORIES = data.categories;
+    ARTICLES = data.articles || [];
+    CATEGORIES = data.categories || [];
     return data;
   } catch (e) {
     console.error('Failed to load articles:', e);
@@ -29,42 +38,36 @@ function renderHeader(activePage = '') {
   ];
 
   const links = navLinks.map(link => `
-    <a href="${link.href}" class="nav-link ${activePage === link.id ? 'active' : ''}">${link.label}</a>
+    <a href="${link.href}" class="nav-link ${activePage === link.id ? 'active' : ''}">${escapeHTML(link.label)}</a>
   `).join('');
 
   const mobileLinks = navLinks.map(link => `
-    <a href="${link.href}" class="block px-4 py-3 rounded-xl font-medium transition-all duration-200 ${activePage === link.id ? 'bg-purple-50 text-purple-700 dark:bg-purple-900/20 dark:text-purple-400' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'}">${link.label}</a>
+    <a href="${link.href}" class="block px-4 py-3 rounded-xl font-medium transition-all duration-200 ${activePage === link.id ? 'bg-purple-50 text-purple-700 dark:bg-purple-900/20 dark:text-purple-400' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'}">${escapeHTML(link.label)}</a>
   `).join('');
 
   const headerHTML = `
     <header id="main-header">
       <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
-          <!-- Logo -->
           <a href="./index.html" class="flex items-center gap-2 group" aria-label="Prakash Knowledge Hub">
-            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-content-center items-center justify-center text-white font-bold text-lg shadow-lg group-hover:shadow-purple-500/30 transition-all duration-200">P</div>
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center text-white font-bold text-lg shadow-lg group-hover:shadow-purple-500/30 transition-all duration-200">P</div>
             <span class="logo-text text-lg font-bold hidden sm:block">Prakash Knowledge</span>
           </a>
 
-          <!-- Desktop Nav -->
           <div class="hidden md:flex items-center gap-1">
             ${links}
           </div>
 
-          <!-- Actions -->
           <div class="flex items-center gap-2">
-            <!-- Search -->
             <a href="search.html" class="theme-toggle" aria-label="Search">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
             </a>
 
-            <!-- Theme Toggle -->
             <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
               <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
               <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
             </button>
 
-            <!-- Mobile Menu Button -->
             <button id="mobile-menu-btn" class="theme-toggle md:hidden" aria-label="Open menu">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
             </button>
@@ -73,7 +76,6 @@ function renderHeader(activePage = '') {
       </nav>
     </header>
 
-    <!-- Mobile Menu Overlay -->
     <div id="mobile-menu" role="dialog" aria-label="Mobile navigation">
       <div id="mobile-menu-panel">
         <div class="flex items-center justify-between mb-6">
@@ -100,18 +102,20 @@ function renderHeader(activePage = '') {
     </div>
   `;
 
-  document.getElementById('header-mount').innerHTML = headerHTML;
-  initHeader();
+  const host = document.getElementById('header-mount');
+  if (host) {
+    host.innerHTML = headerHTML;
+    initHeader();
+  }
 }
 
 // ===== FOOTER HTML =====
 function renderFooter() {
+  const currentYear = new Date().getFullYear();
   const footerHTML = `
     <footer>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
-
-          <!-- Brand -->
           <div class="lg:col-span-2">
             <a href="index.html" class="flex items-center gap-3 mb-4">
               <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center text-white font-bold text-xl">P</div>
@@ -140,7 +144,6 @@ function renderFooter() {
             </div>
           </div>
 
-          <!-- Categories -->
           <div>
             <h4 class="footer-heading">Categories</h4>
             <div class="space-y-1">
@@ -155,7 +158,6 @@ function renderFooter() {
             </div>
           </div>
 
-          <!-- Platform -->
           <div>
             <h4 class="footer-heading">Platform</h4>
             <div class="space-y-1">
@@ -164,14 +166,13 @@ function renderFooter() {
               <a href="about.html" class="footer-link">About Prakash</a>
               <a href="search.html" class="footer-link">Search</a>
               <a href="contact.html" class="footer-link">Contact</a>
-          
             </div>
           </div>
+        </div>
 
-        <!-- Bottom -->
         <div class="border-t border-gray-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p class="text-gray-500 text-sm">
-            © ${new Date().getFullYear()} Prakash Knowledge Hub. All rights reserved.
+            © ${currentYear} Prakash Knowledge Hub. All rights reserved.
           </p>
           <div class="flex items-center gap-6">
             <a href="sitemap.xml" class="text-gray-500 text-sm hover:text-gray-300 transition-colors">Sitemap</a>
@@ -183,34 +184,59 @@ function renderFooter() {
     </footer>
   `;
 
-  document.getElementById('footer-mount').innerHTML = footerHTML;
+  const host = document.getElementById('footer-mount');
+  if (host) {
+    host.innerHTML = footerHTML;
+  }
+}
+
+// ===== INTERPOLATED SCROLL MANAGEMENT (Performance Optimized) =====
+function initScrollPerformance() {
+  let ticking = false;
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        
+        // Sticky Header effect
+        const header = document.getElementById('main-header');
+        if (header) {
+          header.classList.toggle('scrolled', scrollY > 20);
+        }
+
+        // Scroll to top visibility
+        const scrollBtn = document.getElementById('scroll-top');
+        if (scrollBtn) {
+          scrollBtn.classList.toggle('visible', scrollY > 400);
+        }
+
+        // Reading Progress Indicator
+        const progressBar = document.getElementById('reading-progress');
+        if (progressBar) {
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const progress = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
+          progressBar.style.width = `${progress}%`;
+        }
+
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
 }
 
 // ===== HEADER FUNCTIONALITY =====
 function initHeader() {
-  // Sticky scroll effect
-  window.addEventListener('scroll', () => {
-    const header = document.getElementById('main-header');
-    if (header) {
-      header.classList.toggle('scrolled', window.scrollY > 20);
-    }
-
-    // Scroll to top button
-    const scrollBtn = document.getElementById('scroll-top');
-    if (scrollBtn) {
-      scrollBtn.classList.toggle('visible', window.scrollY > 400);
-    }
-  });
-
-  // Mobile menu
+  // Mobile menu links setup
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenuClose = document.getElementById('mobile-menu-close');
   const mobileMenu = document.getElementById('mobile-menu');
 
-  if (mobileMenuBtn) {
+  if (mobileMenuBtn && mobileMenu) {
     mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
   }
-  if (mobileMenuClose) {
+  if (mobileMenuClose && mobileMenu) {
     mobileMenuClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
   }
   if (mobileMenu) {
@@ -219,7 +245,7 @@ function initHeader() {
     });
   }
 
-  // Theme toggle
+  // Theme configuration controls
   const themeToggle = document.getElementById('theme-toggle');
   const sunIcon = document.getElementById('sun-icon');
   const moonIcon = document.getElementById('moon-icon');
@@ -231,13 +257,7 @@ function initHeader() {
     }
   }
 
-  // Initialize theme
-  const isDark = localStorage.getItem('theme') === 'dark' ||
-    (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
-
-  if (isDark) {
-    document.documentElement.classList.add('dark');
-  }
+  const isDark = document.documentElement.classList.contains('dark');
   updateThemeIcons(isDark);
 
   if (themeToggle) {
@@ -249,13 +269,12 @@ function initHeader() {
   }
 }
 
-// ===== THEME INIT (run immediately to prevent flash) =====
+// ===== THEME INIT (Prevent visual flash layout blocking) =====
 function initTheme() {
   const isDark = localStorage.getItem('theme') === 'dark' ||
     (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
-  if (isDark) {
-    document.documentElement.classList.add('dark');
-  }
+  
+  document.documentElement.classList.toggle('dark', isDark);
 }
 
 // ===== INTERSECTION OBSERVER FOR ANIMATIONS =====
@@ -265,11 +284,11 @@ function initAnimations() {
       if (entry.isIntersecting) {
         setTimeout(() => {
           entry.target.classList.add('visible');
-        }, i * 100);
+        }, i * 65);
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
 
   document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 }
@@ -284,12 +303,14 @@ function initScrollTop() {
   }
 }
 
-// ===== NEWSLETTER =====
+// ===== NEWSLETTER SUBSCRIPTION =====
 function subscribeNewsletter(inputId = 'footer-email') {
   const input = document.getElementById(inputId);
   if (!input) return;
   const email = input.value.trim();
-  if (!email || !email.includes('@')) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
+  if (!email || !emailRegex.test(email)) {
     showToast('Please enter a valid email address', 'error');
     return;
   }
@@ -300,7 +321,7 @@ function subscribeNewsletter(inputId = 'footer-email') {
 // ===== TOAST NOTIFICATIONS =====
 function showToast(message, type = 'info') {
   const toast = document.createElement('div');
-  toast.className = `fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 px-6 py-3 rounded-xl text-white text-sm font-medium shadow-xl transition-all duration-300`;
+  toast.className = `fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 px-6 py-3 rounded-xl text-white text-sm font-medium shadow-xl transition-all duration-300 opacity-0 translate-y-4`;
 
   const colors = {
     success: 'bg-green-600',
@@ -313,79 +334,92 @@ function showToast(message, type = 'info') {
   toast.textContent = message;
   document.body.appendChild(toast);
 
+  // Trigger browser paint transition layout entry
+  requestAnimationFrame(() => {
+    toast.classList.remove('opacity-0', 'translate-y-4');
+  });
+
   setTimeout(() => {
-    toast.style.opacity = '0';
-    toast.style.transform = 'translate(-50%, 20px)';
+    toast.classList.add('opacity-0', 'translate-y-4');
     setTimeout(() => toast.remove(), 300);
   }, 3000);
 }
 
 // ===== COPY TO CLIPBOARD =====
 function copyToClipboard(text) {
-  navigator.clipboard.writeText(text).then(() => {
-    showToast('Copied to clipboard! 📋', 'success');
-  }).catch(() => {
-    const el = document.createElement('textarea');
-    el.value = text;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-    showToast('Copied to clipboard! 📋', 'success');
-  });
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast('Copied to clipboard! 📋', 'success');
+    }).catch(() => fallbackCopy(text));
+  } else {
+    fallbackCopy(text);
+  }
 }
 
-// ===== FORMAT NUMBERS =====
+function fallbackCopy(text) {
+  const el = document.createElement('textarea');
+  el.value = text;
+  el.setAttribute('readonly', '');
+  el.style.position = 'absolute';
+  el.style.left = '-9999px';
+  document.body.appendChild(el);
+  el.select();
+  try {
+    document.execCommand('copy');
+    showToast('Copied to clipboard! 📋', 'success');
+  } catch (err) {
+    showToast('Failed to copy text ❌', 'error');
+  }
+  document.body.removeChild(el);
+}
+
+// ===== DATA FORMATTING HELPERS =====
 function formatNumber(num) {
-  if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
-  if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+  if (!num || isNaN(num)) return '0';
+  if (num >= 1000000) return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+  if (num >= 1000) return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
   return num.toString();
 }
 
-// ===== FORMAT DATE =====
 function formatDate(dateStr) {
+  if (!dateStr) return '';
   const date = new Date(dateStr);
-  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  return isNaN(date.getTime()) ? dateStr : date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 }
 
-// ===== READING TIME =====
 function getReadingTime(mins) {
-  return `${mins} min read`;
+  return `${mins || 1} min read`;
 }
 
 // ===== ARTICLE CARD COMPONENT =====
 function createArticleCard(article, size = 'default') {
-  const categoryColors = {
-    'Artificial Intelligence': '#6D28D9',
-    'Pi Network': '#7C3AED',
-    'Web3 & Blockchain': '#8B5CF6',
-    'Data Analytics': '#A78BFA',
-    'Personal Branding': '#F59E0B',
-    'Digital Growth': '#EF4444',
-    'Education': '#10B981',
-    'Agri-Tech': '#059669'
-  };
+  // Dynamically resolve colors from configuration store array mapping if available, fall back cleanly
+  const matchedCategory = CATEGORIES.find(c => c.name === article.category);
+  const color = matchedCategory ? matchedCategory.color : '#6D28D9';
 
-  const color = categoryColors[article.category] || '#6D28D9';
+  const title = escapeHTML(article.title);
+  const excerpt = escapeHTML(article.excerpt);
+  const category = escapeHTML(article.category);
+  const coverImage = encodeURI(article.coverImage);
 
   if (size === 'featured') {
     return `
       <article class="featured-card group" onclick="window.location.href='article.html?slug=${article.slug}'">
         <div class="overflow-hidden relative" style="aspect-ratio: 16/7;">
           <img
-            src="${article.coverImage}"
-            alt="${article.title}"
+            src="${coverImage}"
+            alt="${title}"
             class="w-full h-full object-cover card-image"
             loading="lazy"
           />
           <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
           <div class="absolute bottom-0 left-0 right-0 p-6">
-            <span class="inline-block text-xs font-bold text-white uppercase tracking-wider bg-purple-600 px-3 py-1 rounded-full mb-2">${article.category}</span>
+            <span class="inline-block text-xs font-bold text-white uppercase tracking-wider bg-purple-600 px-3 py-1 rounded-full mb-2">${category}</span>
           </div>
         </div>
         <div class="p-6">
-          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-purple-700 dark:group-hover:text-purple-400 transition-colors line-clamp-2" style="font-family:'Poppins',sans-serif;">${article.title}</h2>
-          <p class="text-gray-500 dark:text-gray-400 mb-4 line-clamp-2 text-sm leading-relaxed">${article.excerpt}</p>
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-purple-700 dark:group-hover:text-purple-400 transition-colors line-clamp-2" style="font-family:'Poppins',sans-serif;">${title}</h2>
+          <p class="text-gray-500 dark:text-gray-400 mb-4 line-clamp-2 text-sm leading-relaxed">${excerpt}</p>
           <div class="flex items-center justify-between text-xs text-gray-400">
             <div class="flex items-center gap-4">
               <span class="flex items-center gap-1">
@@ -409,18 +443,18 @@ function createArticleCard(article, size = 'default') {
     <article class="article-card group" onclick="window.location.href='article.html?slug=${article.slug}'">
       <div class="overflow-hidden relative" style="aspect-ratio: 16/9;">
         <img
-          src="${article.coverImage}"
-          alt="${article.title}"
+          src="${coverImage}"
+          alt="${title}"
           class="card-image w-full h-full object-cover"
           loading="lazy"
         />
         <div class="absolute top-3 left-3">
-          <span class="category-badge" style="background:${color}18;color:${color};border-color:${color}33;">${article.category}</span>
+          <span class="category-badge" style="background:${color}18;color:${color};border-color:${color}33;">${category}</span>
         </div>
       </div>
       <div class="p-5">
-        <h3 class="font-bold text-gray-900 dark:text-white mb-2 group-hover:text-purple-700 dark:group-hover:text-purple-400 transition-colors line-clamp-2 text-base leading-snug" style="font-family:'Poppins',sans-serif;">${article.title}</h3>
-        <p class="text-gray-500 dark:text-gray-400 text-sm mb-4 line-clamp-2 leading-relaxed">${article.excerpt}</p>
+        <h3 class="font-bold text-gray-900 dark:text-white mb-2 group-hover:text-purple-700 dark:group-hover:text-purple-400 transition-colors line-clamp-2 text-base leading-snug" style="font-family:'Poppins',sans-serif;">${title}</h3>
+        <p class="text-gray-500 dark:text-gray-400 text-sm mb-4 line-clamp-2 leading-relaxed">${excerpt}</p>
         <div class="flex items-center justify-between text-xs text-gray-400">
           <div class="flex items-center gap-3">
             <span>${getReadingTime(article.readTime)}</span>
@@ -435,27 +469,15 @@ function createArticleCard(article, size = 'default') {
 
 // ===== SEARCH FUNCTIONALITY =====
 function searchArticles(query, articles = ARTICLES) {
-  if (!query.trim()) return articles;
+  if (!query || !query.trim()) return articles;
   const q = query.toLowerCase().trim();
   return articles.filter(a =>
-    a.title.toLowerCase().includes(q) ||
-    a.excerpt.toLowerCase().includes(q) ||
-    a.category.toLowerCase().includes(q) ||
-    a.tags.some(t => t.toLowerCase().includes(q)) ||
-    a.author.toLowerCase().includes(q)
+    (a.title && a.title.toLowerCase().includes(q)) ||
+    (a.excerpt && a.excerpt.toLowerCase().includes(q)) ||
+    (a.category && a.category.toLowerCase().includes(q)) ||
+    (a.tags && a.tags.some(t => t.toLowerCase().includes(q))) ||
+    (a.author && a.author.toLowerCase().includes(q))
   );
-}
-
-// ===== READING PROGRESS =====
-function initReadingProgress() {
-  const progressBar = document.getElementById('reading-progress');
-  if (!progressBar) return;
-
-  window.addEventListener('scroll', () => {
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
-    progressBar.style.width = progress + '%';
-  });
 }
 
 // ===== LAZY LOAD IMAGES =====
@@ -478,25 +500,12 @@ function initLazyLoad() {
   }
 }
 
-// ===== SMOOTH PAGE TRANSITIONS =====
-function initPageTransitions() {
-  document.querySelectorAll('a[href]').forEach(link => {
-    const href = link.getAttribute('href');
-    if (href && !href.startsWith('#') && !href.startsWith('http') && !href.startsWith('mailto') && !href.startsWith('tel')) {
-      link.addEventListener('click', (e) => {
-        // Let normal navigation happen but add a fade
-        document.body.style.opacity = '0';
-        document.body.style.transition = 'opacity 0.2s ease';
-      });
-    }
-  });
-}
-
 // ===== INITIALIZE PAGE =====
 async function initPage(activePage = '') {
+  // Setup core layouts and tracking
   initTheme();
+  const data = await loadArticles();
 
-  // Render header and footer mounts if they exist
   if (document.getElementById('header-mount')) {
     renderHeader(activePage);
   }
@@ -504,26 +513,27 @@ async function initPage(activePage = '') {
     renderFooter();
   }
 
-  // Create scroll to top button
-  const scrollBtn = document.createElement('button');
-  scrollBtn.id = 'scroll-top';
-  scrollBtn.setAttribute('aria-label', 'Scroll to top');
-  scrollBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18,15 12,9 6,15"></polyline></svg>`;
-  document.body.appendChild(scrollBtn);
+  // Prevent multiple redundant layout element allocations on navigation cycles
+  if (!document.getElementById('scroll-top')) {
+    const scrollBtn = document.createElement('button');
+    scrollBtn.id = 'scroll-top';
+    scrollBtn.setAttribute('aria-label', 'Scroll to top');
+    scrollBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18,15 12,9 6,15"></polyline></svg>`;
+    document.body.appendChild(scrollBtn);
+  }
 
   initScrollTop();
-  initReadingProgress();
+  initScrollPerformance();
   initLazyLoad();
 
-  // Fade in body
+  // Handle smooth page introduction transitions safely
   document.body.style.opacity = '0';
   document.body.style.transition = 'opacity 0.3s ease';
   requestAnimationFrame(() => {
     document.body.style.opacity = '1';
   });
 
-  // Init animations after short delay
   setTimeout(initAnimations, 100);
 
-  return await loadArticles();
+  return data;
 }
