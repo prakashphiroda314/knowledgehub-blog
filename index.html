@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,26 +10,22 @@
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://prakashfirodawork-ctrl.github.io/knowledgehub-blog/" />
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://prakashfirodawork-ctrl.github.io/knowledgehub-blog" />
   <meta property="og:title" content="Prakash Knowledge Hub — Learn. Build. Grow. Impact." />
   <meta property="og:description" content="Practical insights on AI, Pi Network, Web3, Data Analytics, Personal Branding and more." />
   <meta property="og:image" content="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&q=80" />
 
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@Piprotecter" />
   <meta name="twitter:title" content="Prakash Knowledge Hub" />
   <meta name="twitter:description" content="Learn. Build. Grow. Impact." />
   <meta name="twitter:image" content="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&q=80" />
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -50,10 +46,8 @@
     }
   </script>
 
-  <!-- Custom CSS -->
   <link rel="stylesheet" href="assets/css/styles.css" />
 
-  <!-- Schema.org -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -74,7 +68,6 @@
   }
   </script>
 
-  <!-- Theme init -->
   <script>
     (function() {
       const dark = localStorage.getItem('theme') === 'dark' ||
@@ -83,30 +76,25 @@
     })();
   </script>
 </head>
-<body class="bg-white dark:bg-gray-950">
+<body class="bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 antialiased">
 
-  <!-- Header Mount -->
   <div id="header-mount"></div>
 
-  <!-- Reading Progress -->
   <div id="reading-progress"></div>
 
-  <!-- ===== HERO SECTION ===== -->
-  <section class="hero-section pt-16" aria-label="Hero">
-    <div class="hero-bg-pattern"></div>
-    <div class="hero-grid"></div>
+  <section class="hero-section pt-16 relative overflow-hidden" aria-label="Hero Spotlight">
+    <div class="hero-bg-pattern" aria-hidden="true"></div>
+    <div class="hero-grid" aria-hidden="true"></div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
       <div class="max-w-3xl">
 
-        <!-- Badge -->
         <div class="hero-badge mb-6 animate-slide-up">
-          <span class="dot"></span>
+          <span class="dot" aria-hidden="true"></span>
           <span>Prakash Knowledge Hub</span>
-          <span class="text-yellow-400">✦</span>
+          <span class="text-yellow-400" aria-hidden="true">✦</span>
         </div>
 
-        <!-- Headline -->
         <h1 class="hero-title mb-6 animate-slide-up" style="animation-delay:0.1s">
           <span class="block">Learn.</span>
           <span class="block accent">Build.</span>
@@ -114,27 +102,24 @@
           <span class="block" style="color:rgba(255,255,255,0.9)">Impact.</span>
         </h1>
 
-        <!-- Description -->
-        <p class="hero-description mb-8 animate-slide-up" style="animation-delay:0.2s">
+        <p class="hero-description mb-8 animate-slide-up text-purple-100/90" style="animation-delay:0.2s">
           Practical insights on <strong style="color:#C4B5FD">Artificial Intelligence</strong>,
           <strong style="color:#FCD34D">Pi Network</strong>,
           <strong style="color:#C4B5FD">Web3</strong>, Data Analytics, Personal Branding,
           Digital Growth, Education and Agri-Tech.
         </p>
 
-        <!-- CTA Buttons -->
         <div class="flex flex-wrap gap-4 animate-slide-up" style="animation-delay:0.3s">
-          <a href="articles.html" class="btn-primary">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+          <a href="articles.html" class="btn-primary inline-flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
             Explore Articles
           </a>
-          <a href="about.html" class="btn-secondary">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <a href="about.html" class="btn-secondary inline-flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
             About Prakash
           </a>
         </div>
 
-        <!-- Stats Row -->
         <div class="flex flex-wrap gap-8 mt-12 pt-8 border-t border-white/10 animate-slide-up" style="animation-delay:0.4s">
           <div>
             <div class="text-3xl font-bold text-white" style="font-family:Poppins">50+</div>
@@ -156,63 +141,56 @@
       </div>
     </div>
 
-    <!-- Scroll Indicator -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce" aria-hidden="true">
       <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2">
         <div class="w-1.5 h-3 bg-white/50 rounded-full"></div>
       </div>
     </div>
   </section>
 
-  <!-- ===== FEATURED ARTICLE ===== -->
-  <section class="py-16 lg:py-24 bg-white dark:bg-gray-950" aria-label="Featured Article">
+  <section class="py-16 lg:py-24 bg-white dark:bg-gray-950" aria-label="Featured Highlight Story">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="section-header animate-on-scroll">
         <span class="section-eyebrow">Featured</span>
         <h2 class="section-title text-3xl lg:text-4xl mt-2">Editor's Pick</h2>
       </div>
 
-      <div id="featured-article" class="animate-on-scroll">
-        <!-- Populated by JS -->
-        <div class="skeleton h-96 rounded-2xl"></div>
+      <div id="featured-article" class="animate-on-scroll mt-8">
+        <div class="skeleton h-96 rounded-2xl bg-gray-100 dark:bg-gray-900 animate-pulse"></div>
       </div>
     </div>
   </section>
 
-  <!-- ===== EXPLORE TOPICS ===== -->
-  <section class="py-16 lg:py-24 bg-gray-50 dark:bg-gray-900" aria-label="Topics">
+  <section class="py-16 lg:py-24 bg-gray-50 dark:bg-gray-900" aria-label="Knowledge Categories Grid">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="section-header animate-on-scroll">
+      <div class="section-header animate-on-scroll mb-10">
         <span class="section-eyebrow">Explore</span>
         <h2 class="section-title text-3xl lg:text-4xl mt-2">Topics That Matter</h2>
         <p class="section-description mt-3">Eight focused areas of knowledge, curated for the curious and the ambitious.</p>
       </div>
 
       <div id="topics-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-        <!-- Populated by JS -->
-      </div>
+        </div>
     </div>
   </section>
 
-  <!-- ===== LATEST ARTICLES ===== -->
-  <section class="py-16 lg:py-24 bg-white dark:bg-gray-950" aria-label="Latest Articles">
+  <section class="py-16 lg:py-24 bg-white dark:bg-gray-950" aria-label="Fresh Articles Block Feed">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between mb-8 animate-on-scroll">
         <div>
           <span class="section-eyebrow">Fresh</span>
           <h2 class="section-title text-3xl lg:text-4xl mt-2">Latest Articles</h2>
         </div>
-        <a href="articles.html" class="btn-outline hidden sm:inline-flex">
+        <a href="articles.html" class="btn-outline hidden sm:inline-flex items-center gap-2">
           View All
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </a>
       </div>
 
       <div id="latest-articles" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Populated by JS -->
-        <div class="skeleton h-80 rounded-2xl"></div>
-        <div class="skeleton h-80 rounded-2xl"></div>
-        <div class="skeleton h-80 rounded-2xl"></div>
+        <div class="skeleton h-80 rounded-2xl bg-gray-100 dark:bg-gray-900 animate-pulse"></div>
+        <div class="skeleton h-80 rounded-2xl bg-gray-100 dark:bg-gray-900 animate-pulse"></div>
+        <div class="skeleton h-80 rounded-2xl bg-gray-100 dark:bg-gray-900 animate-pulse"></div>
       </div>
 
       <div class="text-center mt-8 sm:hidden">
@@ -221,12 +199,9 @@
     </div>
   </section>
 
-  <!-- ===== POPULAR READS ===== -->
-  <section class="py-16 lg:py-24 bg-gray-50 dark:bg-gray-900" aria-label="Popular Reads">
+  <section class="py-16 lg:py-24 bg-gray-50 dark:bg-gray-900" aria-label="Trending Publications List">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-
-        <!-- Popular List -->
         <div>
           <div class="animate-on-scroll mb-8">
             <span class="section-eyebrow">Trending</span>
@@ -234,33 +209,26 @@
             <p class="section-description text-left mt-2">Articles readers keep coming back to.</p>
           </div>
           <div id="popular-reads" class="space-y-3">
-            <!-- Populated by JS -->
-          </div>
+            </div>
         </div>
-
-        
-
-          
+      </div>
+    </div>          
   </section>
 
-  <!-- ===== MORE ARTICLES CATEGORIES ===== -->
-  <section class="py-16 lg:py-24 bg-white dark:bg-gray-950" aria-label="Browse by Category">
+  <section class="py-16 lg:py-24 bg-white dark:bg-gray-950" aria-label="Category Explorer Section">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="section-header animate-on-scroll">
+      <div class="section-header animate-on-scroll mb-10">
         <span class="section-eyebrow">Discover</span>
         <h2 class="section-title text-3xl lg:text-4xl mt-2">Browse by Category</h2>
       </div>
 
       <div id="category-previews" class="space-y-16">
-        <!-- Populated by JS -->
-      </div>
+        </div>
     </div>
   </section>
 
-  <!-- Footer Mount -->
   <div id="footer-mount"></div>
 
-  <!-- Scripts -->
   <script src="assets/js/main.js"></script>
   <script>
     const TOPICS = [
@@ -278,76 +246,15 @@
       const data = await initPage('home');
       const articles = data.articles || [];
 
-      // Featured Article
+      // Render Spotlight Card Frame
       const featured = articles.find(a => a.featured) || articles[0];
       if (featured) {
         document.getElementById('featured-article').innerHTML = createArticleCard(featured, 'featured');
       }
 
-      // Topics Grid
+      // Render Topics Layout Navigation Deck
       const topicsHtml = TOPICS.map(t => `
-        <a href="articles.html?category=${t.slug}" class="topic-card animate-on-scroll" style="--delay:${t.delay}">
-          <span class="topic-icon" style="--delay:${t.delay}">${t.icon}</span>
+        <a href="articles.html?category=${t.slug}" class="topic-card animate-on-scroll block" style="animation-delay:${t.delay}">
+          <span class="topic-icon block mb-2" aria-hidden="true">${t.icon}</span>
           <div class="font-semibold text-sm text-gray-900 dark:text-white mb-1" style="font-family:Poppins">${t.name}</div>
-          <div class="text-xs text-gray-500 dark:text-gray-400">${t.desc}</div>
-        </a>
-      `).join('');
-      document.getElementById('topics-grid').innerHTML = topicsHtml;
-
-      // Latest Articles (most recent 6, excluding featured)
-      const latest = articles
-        .sort((a, b) => new Date(b.date) - new Date(a.date))
-        .slice(0, 6);
-      document.getElementById('latest-articles').innerHTML = latest.map(a => createArticleCard(a)).join('');
-
-      // Popular Reads (top 8 by views)
-      const popular = [...articles].sort((a, b) => b.views - a.views).slice(0, 8);
-      document.getElementById('popular-reads').innerHTML = popular.map((a, i) => `
-        <a href="article.html?slug=${a.slug}" class="popular-item animate-on-scroll">
-          <span class="popular-number">${String(i + 1).padStart(2, '0')}</span>
-          <div class="flex-1 min-w-0">
-            <div class="font-semibold text-sm text-gray-900 dark:text-white truncate" style="font-family:Poppins">${a.title}</div>
-            <div class="flex items-center gap-3 mt-1 text-xs text-gray-400">
-              <span>${formatNumber(a.views)} views</span>
-              <span>·</span>
-              <span>${getReadingTime(a.readTime)}</span>
-            </div>
-          </div>
-        </a>
-      `).join('');
-
-      // Category Previews (show 2 articles per category for top 4 categories)
-      const topCats = ['Artificial Intelligence', 'Pi Network', 'Data Analytics', 'Personal Branding'];
-      const catIcons = { 'Artificial Intelligence': '🤖', 'Pi Network': 'π', 'Data Analytics': '📊', 'Personal Branding': '✨' };
-      const catPreviews = topCats.map(cat => {
-        const catArticles = articles.filter(a => a.category === cat).slice(0, 3);
-        if (!catArticles.length) return '';
-        const catSlug = cat.toLowerCase().replace(/\s+/g, '-').replace(/[&]/g, '').replace(/--/g, '-');
-        return `
-          <div class="animate-on-scroll">
-            <div class="flex items-center justify-between mb-6">
-              <div class="flex items-center gap-3">
-                <span class="text-2xl">${catIcons[cat] || '📌'}</span>
-                <h3 class="text-xl font-bold text-gray-900 dark:text-white" style="font-family:Poppins">${cat}</h3>
-              </div>
-              <a href="articles.html?category=${catSlug}" class="text-sm text-purple-600 dark:text-purple-400 font-medium hover:underline flex items-center gap-1">
-                See all
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-              </a>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              ${catArticles.map(a => createArticleCard(a)).join('')}
-            </div>
-          </div>
-        `;
-      }).join('');
-      document.getElementById('category-previews').innerHTML = catPreviews;
-
-      // Re-init animations for new elements
-      setTimeout(initAnimations, 100);
-    }
-
-    initHomePage();
-  </script>
-</body>
-</html>
+          <div class="text-xs text-gray-500 dark
