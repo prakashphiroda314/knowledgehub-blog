@@ -257,4 +257,65 @@
         <a href="articles.html?category=${t.slug}" class="topic-card animate-on-scroll block" style="animation-delay:${t.delay}">
           <span class="topic-icon block mb-2" aria-hidden="true">${t.icon}</span>
           <div class="font-semibold text-sm text-gray-900 dark:text-white mb-1" style="font-family:Poppins">${t.name}</div>
-          <div class="text-xs text-gray-500 dark
+          <div class="text-xs text-gray-500 dark:text-gray-400">${t.desc}</div>
+        </a>
+      `).join('');
+      document.getElementById('topics-grid').innerHTML = topicsHtml;
+
+      // Latest Articles (most recent 6, excluding featured)
+      const latest = articles
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .slice(0, 6);
+      document.getElementById('latest-articles').innerHTML = latest.map(a => createArticleCard(a)).join('');
+
+      // Popular Reads (top 8 by views)
+      const popular = [...articles].sort((a, b) => b.views - a.views).slice(0, 8);
+      document.getElementById('popular-reads').innerHTML = popular.map((a, i) => `
+        <a href="article.html?slug=${a.slug}" class="popular-item animate-on-scroll">
+          <span class="popular-number">${String(i + 1).padStart(2, '0')}</span>
+          <div class="flex-1 min-w-0">
+            <div class="font-semibold text-sm text-gray-900 dark:text-white truncate" style="font-family:Poppins">${a.title}</div>
+            <div class="flex items-center gap-3 mt-1 text-xs text-gray-400">
+              <span>${formatNumber(a.views)} views</span>
+              <span>·</span>
+              <span>${getReadingTime(a.readTime)}</span>
+            </div>
+          </div>
+        </a>
+      `).join('');
+
+      // Category Previews (show 2 articles per category for top 4 categories)
+      const topCats = ['Artificial Intelligence', 'Pi Network', 'Data Analytics', 'Personal Branding'];
+      const catIcons = { 'Artificial Intelligence': '🤖', 'Pi Network': 'π', 'Data Analytics': '📊', 'Personal Branding': '✨' };
+      const catPreviews = topCats.map(cat => {
+        const catArticles = articles.filter(a => a.category === cat).slice(0, 3);
+        if (!catArticles.length) return '';
+        const catSlug = cat.toLowerCase().replace(/\s+/g, '-').replace(/[&]/g, '').replace(/--/g, '-');
+        return `
+          <div class="animate-on-scroll">
+            <div class="flex items-center justify-between mb-6">
+              <div class="flex items-center gap-3">
+                <span class="text-2xl">${catIcons[cat] || '📌'}</span>
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white" style="font-family:Poppins">${cat}</h3>
+              </div>
+              <a href="articles.html?category=${catSlug}" class="text-sm text-purple-600 dark:text-purple-400 font-medium hover:underline flex items-center gap-1">
+                See all
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </a>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              ${catArticles.map(a => createArticleCard(a)).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+      document.getElementById('category-previews').innerHTML = catPreviews;
+
+      // Re-init animations for new elements
+      setTimeout(initAnimations, 100);
+    }
+
+    initHomePage();
+  </script>
+</body>
+</html>
