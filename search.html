@@ -19,8 +19,34 @@
       if (dark) document.documentElement.classList.add('dark');
     })();
   </script>
+  <style>
+    /* Robust Input Layout Guard Configuration */
+    .search-input {
+      width: 100%;
+      background-color: #F9FAFB;
+      border: 1px solid #E5E7EB;
+      border-radius: 0.75rem;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .search-input:focus {
+      border-color: #6D28D9;
+      background-color: #FFFFFF;
+      box-shadow: 0 0 0 3px rgba(109, 40, 217, 0.15);
+    }
+    .dark .search-input {
+      background-color: #111827;
+      border-color: #374151;
+      color: #FFFFFF;
+    }
+    .dark .search-input:focus {
+      border-color: #7C3AED;
+      background-color: #030712;
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.25);
+    }
+  </style>
 </head>
-<body class="bg-white dark:bg-gray-950">
+<body class="bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 antialiased">
   <div id="header-mount"></div>
 
   <main class="pt-24 min-h-screen">
@@ -32,55 +58,48 @@
         <p class="text-gray-500 dark:text-gray-400">Search across articles, categories, tags and authors.</p>
       </div>
 
-      <!-- Search Input -->
-      <div class="relative mb-8 animate-on-scroll">
-        <svg class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 z-10" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <div class="relative mb-8 text-gray-400 focus-within:text-purple-500 transition-colors animate-on-scroll">
+        <svg class="absolute left-5 top-1/2 -translate-y-1/2 pointer-events-none z-10" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         <input
           type="search"
           id="search-input"
-          class="search-input text-lg py-4 pl-14 pr-6"
+          class="search-input text-lg py-4 pl-14 pr-12 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
           placeholder="Search articles, topics, AI, Pi Network..."
           autofocus
         />
-        <button id="clear-btn" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 hidden">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        <button id="clear-btn" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 hidden transition-colors" aria-label="Clear Search Criteria">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
       </div>
 
-      <!-- Quick Topics -->
       <div id="quick-topics" class="flex flex-wrap gap-2 mb-8 animate-on-scroll">
         <span class="text-sm text-gray-500 dark:text-gray-400 mr-2 self-center">Popular:</span>
-        <button onclick="setSearch('Artificial Intelligence')" class="tag hover:text-purple-600">🤖 AI</button>
-        <button onclick="setSearch('Pi Network')" class="tag hover:text-purple-600">π Pi Network</button>
-        <button onclick="setSearch('Web3')" class="tag hover:text-purple-600">⛓️ Web3</button>
-        <button onclick="setSearch('Data Analytics')" class="tag hover:text-purple-600">📊 Data</button>
-        <button onclick="setSearch('LinkedIn')" class="tag hover:text-purple-600">✨ Branding</button>
-        <button onclick="setSearch('Agriculture')" class="tag hover:text-purple-600">🌾 Agri</button>
-        <button onclick="setSearch('ChatGPT')" class="tag hover:text-purple-600">ChatGPT</button>
-        <button onclick="setSearch('career')" class="tag hover:text-purple-600">Career</button>
+        <button onclick="setSearch('Artificial Intelligence')" class="tag px-3 py-1 text-xs font-medium rounded-full bg-gray-100 dark:bg-gray-900 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">🤖 AI</button>
+        <button onclick="setSearch('Pi Network')" class="tag px-3 py-1 text-xs font-medium rounded-full bg-gray-100 dark:bg-gray-900 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">π Pi Network</button>
+        <button onclick="setSearch('Web3')" class="tag px-3 py-1 text-xs font-medium rounded-full bg-gray-100 dark:bg-gray-900 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">⛓️ Web3</button>
+        <button onclick="setSearch('Data Analytics')" class="tag px-3 py-1 text-xs font-medium rounded-full bg-gray-100 dark:bg-gray-900 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">📊 Data</button>
+        <button onclick="setSearch('LinkedIn')" class="tag px-3 py-1 text-xs font-medium rounded-full bg-gray-100 dark:bg-gray-900 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">✨ Branding</button>
+        <button onclick="setSearch('Agriculture')" class="tag px-3 py-1 text-xs font-medium rounded-full bg-gray-100 dark:bg-gray-900 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">🌾 Agri</button>
+        <button onclick="setSearch('ChatGPT')" class="tag px-3 py-1 text-xs font-medium rounded-full bg-gray-100 dark:bg-gray-900 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">ChatGPT</button>
+        <button onclick="setSearch('career')" class="tag px-3 py-1 text-xs font-medium rounded-full bg-gray-100 dark:bg-gray-900 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Career</button>
       </div>
 
-      <!-- Results Count -->
-      <div id="search-meta" class="text-sm text-gray-500 dark:text-gray-400 mb-6 hidden"></div>
+      <div id="search-meta" class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-6 hidden"></div>
 
-      <!-- Results -->
       <div id="search-results" class="space-y-4"></div>
 
-      <!-- Empty State -->
-      <div id="no-results" class="hidden text-center py-16">
-        <div class="text-6xl mb-4">🔍</div>
+      <div id="no-results" class="hidden text-center py-16 bg-gray-50 dark:bg-gray-900/40 rounded-2xl border border-dashed border-gray-200 dark:border-gray-800">
+        <div class="text-6xl mb-4" aria-hidden="true">🔍</div>
         <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2" style="font-family:Poppins">No results found</h3>
-        <p class="text-gray-500 dark:text-gray-400 mb-4">Try different keywords or explore our categories.</p>
-        <a href="categories.html" class="btn-outline inline-flex">Browse Categories</a>
+        <p class="text-gray-500 dark:text-gray-400 mb-5 max-w-sm mx-auto">Try typing alternative terms or explore full content sectors via general areas.</p>
+        <a href="categories.html" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium border border-purple-600 text-purple-600 dark:text-purple-400 dark:border-purple-500 hover:bg-purple-600 hover:text-white dark:hover:bg-purple-500 dark:hover:text-white rounded-xl transition-colors">Browse Categories</a>
       </div>
 
-      <!-- Initial State -->
       <div id="initial-state" class="text-center py-12">
-        <div class="text-5xl mb-6">💡</div>
+        <div class="text-5xl mb-6" aria-hidden="true">💡</div>
         <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-6" style="font-family:Poppins">Explore Knowledge Domains</h3>
         <div id="initial-categories" class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <!-- Populated by JS -->
-        </div>
+          </div>
       </div>
     </div>
   </main>
@@ -93,11 +112,11 @@
 
     function createSearchResult(article) {
       return `
-        <a href="article.html?slug=${article.slug}" class="flex gap-4 p-4 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-purple-300 dark:hover:border-purple-700 transition-all group bg-white dark:bg-gray-900">
-          <img src="${article.coverImage}" alt="${article.title}" class="w-20 h-16 object-cover rounded-lg flex-shrink-0" loading="lazy" />
+        <a href="article.html?slug=${article.slug}" class="flex gap-4 p-4 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-purple-300 dark:hover:border-purple-700 transition-all group bg-white dark:bg-gray-900 shadow-sm hover:shadow">
+          <img src="${article.coverImage}" alt="" class="w-20 h-16 object-cover rounded-lg flex-shrink-0 bg-gray-100" loading="lazy" aria-hidden="true" />
           <div class="flex-1 min-w-0">
             <div class="flex items-center gap-2 mb-1">
-              <span class="category-badge text-xs">${article.category}</span>
+              <span class="category-badge text-xs font-semibold px-2 py-0.5 rounded-md bg-purple-50 dark:bg-purple-950/40 text-purple-600 dark:text-purple-400">${article.category}</span>
               <time class="text-xs text-gray-400">${formatDate(article.date)}</time>
             </div>
             <h3 class="font-semibold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors text-sm leading-snug mb-1" style="font-family:Poppins">${article.title}</h3>
@@ -154,7 +173,7 @@
       const data = await initPage('');
       allArticles = data.articles || [];
 
-      // Initial categories
+      // Render Dashboard Category Summaries Core Collection Deck
       const cats = [
         { name: 'AI', slug: 'Artificial Intelligence', icon: '🤖' },
         { name: 'Pi Network', slug: 'Pi Network', icon: 'π' },
@@ -166,13 +185,13 @@
         { name: 'Agri-Tech', slug: 'Agri-Tech', icon: '🌾' },
       ];
       document.getElementById('initial-categories').innerHTML = cats.map(c => `
-        <button onclick="setSearch('${c.slug}')" class="flex flex-col items-center gap-1 p-3 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-purple-300 dark:hover:border-purple-700 transition-all cursor-pointer bg-white dark:bg-gray-900">
-          <span class="text-2xl">${c.icon}</span>
-          <span class="text-xs font-medium text-gray-700 dark:text-gray-300">${c.name}</span>
+        <button onclick="setSearch('${c.slug}')" class="flex flex-col items-center gap-1 p-3 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-purple-300 dark:hover:border-purple-700 transition-all cursor-pointer bg-white dark:bg-gray-900 group">
+          <span class="text-2xl transform transition-transform duration-200 group-hover:scale-110" aria-hidden="true">${c.icon}</span>
+          <span class="text-xs font-medium text-gray-700 dark:text-gray-300 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">${c.name}</span>
         </button>
       `).join('');
 
-      // Check URL params
+      // Evaluate active parameters 
       const params = new URLSearchParams(window.location.search);
       const q = params.get('q');
       if (q) {
@@ -180,7 +199,7 @@
         performSearch(q);
       }
 
-      // Search input handler
+      // Input event setup
       const searchInput = document.getElementById('search-input');
       let debounceTimer;
       searchInput.addEventListener('input', (e) => {
@@ -194,7 +213,7 @@
         searchInput.focus();
       });
 
-      initAnimations();
+      if (typeof initAnimations === 'function') initAnimations();
     }
 
     initSearchPage();
