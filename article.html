@@ -21,34 +21,28 @@
     })();
   </script>
 </head>
-<body class="bg-white dark:bg-gray-950">
+<body class="bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 antialiased">
   <div id="header-mount"></div>
   <div id="reading-progress"></div>
 
   <main id="article-main" class="pt-16">
-    <!-- Loading -->
     <div id="loading-state" class="max-w-4xl mx-auto px-4 py-32 text-center">
-      <div class="loading-spinner mb-4"></div>
+      <div class="loading-spinner mb-4 mx-auto"></div>
       <p class="text-gray-500">Loading article...</p>
     </div>
 
-    <!-- Article Content (hidden until loaded) -->
     <div id="article-content" class="hidden">
 
-      <!-- Hero Image -->
       <div class="relative h-64 sm:h-96 lg:h-[480px] overflow-hidden">
         <img id="article-hero-img" src="" alt="" class="w-full h-full object-cover" />
         <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent"></div>
       </div>
 
-      <!-- Article Layout -->
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="flex gap-12">
+        <div class="flex flex-col lg:flex-row gap-12">
 
-          <!-- Main Content -->
           <article class="flex-1 min-w-0 max-w-none lg:max-w-[720px]">
 
-            <!-- Breadcrumb -->
             <nav class="breadcrumb mb-6" aria-label="Breadcrumb">
               <a href="index.html">Home</a>
               <span class="breadcrumb-sep">/</span>
@@ -57,20 +51,17 @@
               <span id="breadcrumb-category" class="text-purple-600 dark:text-purple-400"></span>
             </nav>
 
-            <!-- Category + Meta -->
             <div class="flex flex-wrap items-center gap-3 mb-4">
               <span id="article-category-badge" class="category-badge"></span>
-              <span class="text-gray-300 dark:text-gray-600">·</span>
+              <span class="text-gray-300 dark:text-gray-600" aria-hidden="true">·</span>
               <time id="article-date" class="text-sm text-gray-500 dark:text-gray-400"></time>
             </div>
 
-            <!-- Title -->
             <h1 id="article-title" class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-6 leading-tight" style="font-family:Poppins"></h1>
 
-            <!-- Author + Stats Bar -->
             <div class="flex flex-wrap items-center gap-6 py-4 border-y border-gray-200 dark:border-gray-800 mb-8">
               <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center text-white font-bold text-sm">P</div>
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center text-white font-bold text-sm" aria-hidden="true">P</div>
                 <div>
                   <div class="font-semibold text-sm text-gray-900 dark:text-white" style="font-family:Poppins">Prakash Choudhary</div>
                   <div class="text-xs text-gray-500 dark:text-gray-400">AI Educator · Web3 Advocate</div>
@@ -78,74 +69,67 @@
               </div>
               <div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 ml-auto">
                 <span id="article-readtime" class="flex items-center gap-1">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
                 </span>
                 <span id="article-views" class="flex items-center gap-1">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                 </span>
                 <span id="article-likes" class="flex items-center gap-1">❤️</span>
               </div>
             </div>
 
-            <!-- Tags -->
             <div id="article-tags" class="flex flex-wrap gap-2 mb-8"></div>
 
-            <!-- Article Body -->
             <div id="article-body" class="article-body"></div>
 
-            <!-- Share -->
             <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
               <h3 class="font-bold text-gray-900 dark:text-white mb-4" style="font-family:Poppins">Share this article</h3>
               <div class="flex flex-wrap gap-3" id="share-buttons"></div>
             </div>
 
-            <!-- Author Card -->
-            <div class="author-card mt-12">
-              <div class="flex items-start gap-4">
-                <div class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center text-white font-bold text-2xl flex-shrink-0">P</div>
+            <div class="author-card mt-12 bg-gray-50 dark:bg-gray-900 p-6 rounded-2xl border border-gray-200 dark:border-gray-800">
+              <div class="flex flex-col sm:flex-row items-start gap-4">
+                <div class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center text-white font-bold text-2xl flex-shrink-0" aria-hidden="true">P</div>
                 <div>
                   <div class="font-bold text-lg text-gray-900 dark:text-white mb-1" style="font-family:Poppins">Prakash Choudhary</div>
                   <div class="text-purple-600 dark:text-purple-400 text-sm font-medium mb-2">AI Educator · Digital Builder · Web3 Advocate</div>
                   <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4">Helping students, professionals and entrepreneurs navigate AI, Web3, Pi Network, Data Analytics and Agri-Tech. Based globally, writing for impact.</p>
-                  <div class="flex gap-3">
-                    <a href="https://www.linkedin.com/in/prakashphiroda" target="_blank" rel="noopener" class="social-link">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                  <div class="flex items-center gap-3">
+                    <a href="https://www.linkedin.com/in/prakashphiroda" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-purple-600 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
                     </a>
-                    <a href="https://x.com/Piprotecter" target="_blank" rel="noopener" class="social-link">𝕏</a>
-                    <a href="https://prakashfirodawork-ctrl.github.io/Prakash-Identity-Hub/" class="text-sm text-purple-600 dark:text-purple-400 font-medium hover:underline ml-2 self-center">View Profile →</a>
+                    <a href="https://x.com/Piprotecter" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-purple-600 font-bold transition-colors text-sm">𝕏</a>
+                    <a href="https://prakashfirodawork-ctrl.github.io/Prakash-Identity-Hub/" class="text-sm text-purple-600 dark:text-purple-400 font-medium hover:underline ml-auto sm:ml-2">View Profile →</a>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Prev/Next -->
             <div id="prev-next" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12"></div>
           </article>
 
-          <!-- Sidebar (Table of Contents) -->
           <aside class="hidden lg:block w-64 flex-shrink-0">
             <div class="sticky top-24">
               <div class="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-5">
                 <h4 class="font-bold text-sm text-gray-900 dark:text-white mb-4 uppercase tracking-wider" style="font-family:Poppins">Table of Contents</h4>
                 <nav id="toc" class="space-y-1"></nav>
               </div>
+            </div>
+          </aside>
 
-              
-
-        <!-- Related Articles -->
-        <div class="mt-16 pt-12 border-t border-gray-200 dark:border-gray-800">
+        </div> <div class="mt-16 pt-12 border-t border-gray-200 dark:border-gray-800">
           <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8" style="font-family:Poppins">Related Articles</h2>
           <div id="related-articles" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </div>
+
       </div>
     </div>
 
-    <!-- 404 State -->
     <div id="not-found-state" class="hidden max-w-2xl mx-auto px-4 py-32 text-center">
-      <div class="text-6xl mb-4">📭</div>
+      <div class="text-6xl mb-4" aria-hidden="true">📭</div>
       <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-3" style="font-family:Poppins">Article Not Found</h2>
       <p class="text-gray-500 dark:text-gray-400 mb-6">We couldn't find the article you're looking for.</p>
-      <a href="articles.html" class="btn-primary inline-flex">Browse All Articles</a>
+      <a href="articles.html" class="inline-flex items-center justify-center px-5 py-3 bg-purple-700 hover:bg-purple-800 text-white rounded-xl font-medium transition-colors">Browse All Articles</a>
     </div>
   </main>
 
@@ -177,11 +161,11 @@
         return;
       }
 
-      // Update meta tags
+      // Update structural runtime meta parameters
       document.getElementById('page-title').textContent = article.title + ' — Prakash Knowledge Hub';
       document.getElementById('page-desc').content = article.excerpt;
 
-      // Populate article
+      // Inject details
       document.getElementById('article-hero-img').src = article.coverImage;
       document.getElementById('article-hero-img').alt = article.title;
       document.getElementById('breadcrumb-category').textContent = article.category;
@@ -189,47 +173,47 @@
       document.getElementById('article-date').textContent = formatDate(article.date);
       document.getElementById('article-date').setAttribute('datetime', article.date);
       document.getElementById('article-title').textContent = article.title;
-      document.getElementById('article-readtime').innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg> ${getReadingTime(article.readTime)}`;
-      document.getElementById('article-views').innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> ${formatNumber(article.views)}`;
+      document.getElementById('article-readtime').innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg> ${getReadingTime(article.readTime)}`;
+      document.getElementById('article-views').innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> ${formatNumber(article.views)}`;
       document.getElementById('article-likes').textContent = `❤️ ${formatNumber(article.likes)}`;
 
-      // Tags
+      // Setup tag arrays
       document.getElementById('article-tags').innerHTML = article.tags.map(t =>
         `<a href="search.html?q=${encodeURIComponent(t)}" class="tag">${t}</a>`
       ).join('');
 
-      // Body
+      // Inject Content 
       document.getElementById('article-body').innerHTML = article.content;
 
-      // Table of Contents
+      // Table of Contents Build
       buildToC();
 
-      // Share buttons
+      // Social Interactions Component Configuration Setup
       const url = encodeURIComponent(window.location.href);
       const title = encodeURIComponent(article.title);
       document.getElementById('share-buttons').innerHTML = `
-        <a href="https://twitter.com/intent/tweet?url=${url}&text=${title}&via=Piprotecter" target="_blank" rel="noopener" class="share-btn share-twitter">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        <a href="https://twitter.com/intent/tweet?url=${url}&text=${title}&via=Piprotecter" target="_blank" rel="noopener noreferrer" class="share-btn share-twitter">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           Share on X
         </a>
-        <a href="https://www.linkedin.com/sharing/share-offsite/?url=${url}" target="_blank" rel="noopener" class="share-btn share-linkedin">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=${url}" target="_blank" rel="noopener noreferrer" class="share-btn share-linkedin">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
           Share on LinkedIn
         </a>
         <button onclick="copyToClipboard(window.location.href)" class="share-btn share-copy">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
           Copy Link
         </button>
       `;
 
-      // Related Articles
+      // Filter and append contextual suggestions
       const related = articles
         .filter(a => a.slug !== slug && (a.category === article.category || a.tags.some(t => article.tags.includes(t))))
         .sort((a, b) => b.views - a.views)
         .slice(0, 3);
       document.getElementById('related-articles').innerHTML = related.map(a => createArticleCard(a)).join('');
 
-      // Prev/Next
+      // Handle pagination linkages arrays
       const idx = articles.findIndex(a => a.slug === slug);
       const prev = articles[idx - 1];
       const next = articles[idx + 1];
@@ -254,7 +238,7 @@
       }
       document.getElementById('prev-next').innerHTML = prevNextHtml;
 
-      // Show content
+      // State Toggle
       loading.classList.add('hidden');
       content.classList.remove('hidden');
 
@@ -268,7 +252,8 @@
       const toc = document.getElementById('toc');
 
       if (headings.length === 0) {
-        toc.closest('.sticky').style.display = 'none';
+        const aside = toc.closest('aside');
+        if (aside) aside.style.display = 'none';
         return;
       }
 
@@ -286,7 +271,6 @@
         </a>
       `).join('');
 
-      // Active heading tracking
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           const tocItem = toc.querySelector(`[href="#${entry.target.id}"]`);
